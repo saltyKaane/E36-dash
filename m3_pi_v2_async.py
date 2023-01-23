@@ -65,7 +65,7 @@ class ecuThread(Thread):
         if piTFT:
             connection = obd.Async("/dev/ttyUSB0", 115200, "3", fast=False)
         else:
-            connection = obd.Async("/dev/tty.usbserial-113010839615", 115200, "3", fast=False)
+            connection = obd.Async(fast=False)
 
         # Watch everything we care about.
         connection.watch(obd.commands.RPM, callback=self.new_rpm)
@@ -244,7 +244,7 @@ def find_nearest(array, value):
     return idx
 
 
-# Given RPM and speed, calculate what gear we're probably in. 
+# Given RPM and speed, calculate what gear we're probably in.
 def calcGear(rpm, speed):
     global gear
     # We're stopped, so we're obviously in neutral.
@@ -364,11 +364,11 @@ pygame.display.set_caption('M3 PI')
 # Create a clock object so we can display FPS.
 clock = pygame.time.Clock()
 
-# Create the csv log file with the specified header.		
-createLog(["TIME", "RPM", "SPEED", "COOLANT_TEMP", "INTAKE_TEMP", "MAF", "THROTTLE_POS", "ENGINE_LOAD"])
+# Create the csv log file with the specified header.
+# createLog(["TIME", "RPM", "SPEED", "COOLANT_TEMP", "INTAKE_TEMP", "MAF", "THROTTLE_POS", "ENGINE_LOAD"])
 
-with open('logs/' + startTime + '.csv', 'rb') as csvfile:
-    reader = csv.DictReader(csvfile)
+# with open('logs/' + startTime + '.csv', 'rb') as csvfile:
+#     reader = csv.DictReader(csvfile)
 
 # Get the IP address
 getIP()
